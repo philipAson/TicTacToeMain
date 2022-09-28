@@ -69,7 +69,10 @@ public class GameBoard {
 
 
     boolean checkWin() {
+        if (player1Positions.size() + player2Positions.size() == 9)
         return true;
+        else
+        return false;
     }
 }
 
