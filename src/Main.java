@@ -12,11 +12,13 @@ public class Main {
             int pLayer1Pos = scanner.nextInt();
             gameBoard.placePiece("Player1", pLayer1Pos);
             gameBoard.printGameBoard();
+            System.out.println(gameBoard.player1Positions);
 
             System.out.println("Player2" + " place your piece");
             int player2Pos = scanner.nextInt();
             gameBoard.placePiece("Player2", player2Pos);
             gameBoard.printGameBoard();
+            System.out.println(gameBoard.player2Positions);
         }
 
     }

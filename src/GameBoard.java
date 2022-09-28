@@ -1,8 +1,10 @@
-import java.util.Scanner;
+import java.util.ArrayList;
 
 public class GameBoard {
-
-    // char 2D array that defines
+    // Array-lists that stores the "players move".
+    ArrayList<Integer> player1Positions = new ArrayList<>();
+    ArrayList<Integer> player2Positions = new ArrayList<>();
+    // char 2D array that defines our game board
     private char [][] gameBoard = {
             {' ',' ',' '},
             {' ',' ',' '},
@@ -16,18 +18,22 @@ public class GameBoard {
                 "---+---+---\n" +
                 " "+gameBoard[2][0]+" | "+gameBoard[2][1]+" | "+gameBoard[2][2]+" ");
     }
-
+    //Method that takes in a String and int. representing a player and referred position.
     void placePiece(String player, int pos) {
 
         char symbol = ' ';
-
+        /* if statement that decides what value (symbol) has,
+        depending on what String u place in the Method
+        then stores that value in a playerArray */
         if (player.equals("Player1")) {
             symbol = 'X';
+            player1Positions.add(pos);
         } else if (player.equals("Player2")) {
             symbol = 'O';
+            player2Positions.add(pos);
         }
-
-
+        /* Switch statement that takes in an int which represents a place in the 2D array.
+        and places an X/O there */
         switch (pos) {
             case 1:
                 gameBoard[0][0] = symbol;
@@ -57,8 +63,7 @@ public class GameBoard {
                 gameBoard[2][2] = symbol;
                 break;
             default:
-                break;
-               // System.out.println("Not a valid position!");
+                System.out.println("Not a valid position!");
         }
     }
 
