@@ -4,6 +4,7 @@ public class GameBoard {
     // Array-lists that stores the "players move".
     ArrayList<Integer> player1Positions = new ArrayList<>();
     ArrayList<Integer> player2Positions = new ArrayList<>();
+    ArrayList<Integer> cpuPositions = new ArrayList<>();
     // char 2D array that defines our game board
     private char [][] gameBoard = {
             {' ',' ',' '},
@@ -31,6 +32,9 @@ public class GameBoard {
         } else if (player.equals("Player2")) {
             symbol = 'O';
             player2Positions.add(pos);
+        } else if (player.equals("Cpu")) {
+            symbol = 'O';
+            cpuPositions.add(pos);
         }
         /* Switch statement that takes in an int which represents a place in the 2D array.
         and places an X/O there */
