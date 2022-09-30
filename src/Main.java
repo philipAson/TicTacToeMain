@@ -49,6 +49,10 @@ public class Main {
                 playerIteration(player1, gameBoard, gameBoard.player1Positions);
 
                 cpuIteration(cpu, gameBoard, gameBoard.player2Positions);
+                // FUNKAR INTE !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+                if (gameBoard.checkTie()) break;
+                // Tror metoden funkar men en scanner(sys.in)-loop går in och jag får inte programmet till att skicka ut en Tie print
+                else if (gameBoard.checkWin()) break;
             }
         }
     }
@@ -56,16 +60,21 @@ public class Main {
         Scanner scanner = new Scanner(System.in);
 
         System.out.println(player.getName() + " place your piece");
+        // "place piece"
         int playerPos = scanner.nextInt();
-        // while input is equal to a value in one of playerPos-array, ask for a new value.
+        // while (playerPos contains a value in one of playerPosition-array, ask for a new value.)
         while (gameBoard.player1Positions.contains(playerPos) || gameBoard.player2Positions.contains(playerPos)) {
             System.out.println("Position taken!!!");
             playerPos = scanner.nextInt();
         }
+        // sends the current player and its chosen position to GameBoard.placePiece method.
         gameBoard.placePiece(player, playerPos);
+        // prints gameBoard where (Player player(symbol)) has replaced gameBoard[' '].
         gameBoard.printGameBoard();
+        // prints all the current player "moves"
         System.out.println(arrayList);
     }
+    // follow the same concept as playerIteration but the "position" is dictated by a Random element.
     static void cpuIteration (Player player, GameBoard gameBoard, ArrayList arrayList) {
         Random rNG = new Random();
         /* cpu position is set by a randomNumberGenerator (1-9)

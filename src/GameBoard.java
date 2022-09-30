@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.util.Collections;
 
 public class GameBoard {
     // Array-lists that stores the "players move".
@@ -10,6 +11,10 @@ public class GameBoard {
             {' ',' ',' '},
             {' ',' ',' '},
             {' ',' ',' '}};
+    private int [][] winningConditions = {
+            {1, 2, 3},{4, 5, 6},{7, 8, 9},  //row
+            {1, 4, 7},{2, 5, 8},{3, 6, 9},  //colum
+            {1, 5, 9},{3, 5, 7}};           //cross
     // method for printing the gameBoard and its content in a visually appealing way
     void printGameBoard() {
         System.out.println(
@@ -19,18 +24,11 @@ public class GameBoard {
                 "---+---+---\n" +
                 " "+gameBoard[2][0]+" | "+gameBoard[2][1]+" | "+gameBoard[2][2]+" ");
     }
-    //Method that takes in a String and int. representing a player and referred position.
+    //Method that takes in a Player and int. representing a player and referred position.
     void placePiece(Player player, int pos) {
 
-        char symbol = ' ';
-        /* if statement that decides what value (symbol) has,
-        depending on what String u place in the Method
-        then stores that value in a playerArray */
-
-//      char symbol = player.getSymbol()
-
-
-
+        /* if statement that decides which ArrayList to place (int pos("position")) in
+        depending on what (playerNum), (Player player) has */
         if (player.getPlayerNum() == 1) {
             player1Positions.add(pos);
         } else if (player.getPlayerNum() == 2) {
@@ -74,10 +72,22 @@ public class GameBoard {
 
 
     boolean checkWin() {
-        if (player1Positions.size() + player2Positions.size() == 9)
-        return true;
-        else
-        return false;
+
+        if (player1Positions.containsAll(Collections.singleton(winningConditions)) ||
+            player2Positions.containsAll(Collections.singleton(winningConditions))) {
+            return true;
+        } else
+            return false;
     }
+    boolean checkTie() {
+        if ((player1Positions.size() + player2Positions.size()) == 9) {
+            return true;
+        } else
+            return false;
+    }
+
+
+
+
 }
 
