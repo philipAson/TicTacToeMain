@@ -10,36 +10,6 @@ public class Main {
         menu();
 
     }
-
-    static void playerIteration (String playerName, GameBoard gameBoard, ArrayList arrayList) {
-        Scanner scanner = new Scanner(System.in);
-
-        System.out.println(playerName + " place your piece");
-        int playerPos = scanner.nextInt();
-        // while input is equal to a value in one of playerPos-array, ask for a new value.
-        while (gameBoard.player1Positions.contains(playerPos) || gameBoard.player2Positions.contains(playerPos)) {
-            System.out.println("Position taken!!!");
-            playerPos = scanner.nextInt();
-        }
-        gameBoard.placePiece(playerName, playerPos);
-        gameBoard.printGameBoard();
-        System.out.println(arrayList);
-    }
-    
-    static void cpuIteration (String name, GameBoard gameBoard, ArrayList arrayList) {
-        Random rNG = new Random();
-        /* cpu position is set by a randomNumberGenerator (1-9)
-        1-9 */
-        int cpuPos = rNG.nextInt(9) + 1;
-        while (gameBoard.player1Positions.contains(cpuPos) || gameBoard.cpuPositions.contains(cpuPos)) {
-            cpuPos = rNG.nextInt(9) + 1;
-        }
-        gameBoard.placePiece(name, cpuPos);
-        gameBoard.printGameBoard();
-        System.out.println(arrayList);
-
-
-    }
     static void menu () {
         System.out.println("""
                 *** New Game ***
@@ -47,22 +17,68 @@ public class Main {
                 Player Vs. Cpu: 2""");
         Scanner scanner = new Scanner(System.in);
         byte choice = scanner.nextByte();
-        if (choice == 1) {
-            // input x2 "Enter Names"
-            while (true) {
-                playerIteration("Player1", gameBoard, gameBoard.player1Positions);
 
-                playerIteration("Player2", gameBoard, gameBoard.player2Positions);
+
+
+        if (choice == 1) {
+            Scanner sc = new Scanner(System.in);
+
+            System.out.println("Player1 Enter your name");
+            String inputName1 = sc.nextLine();
+
+            System.out.println("Player2 Enter your name");
+            String inputName2 = sc.nextLine();
+
+            Player player1 = new Player(inputName1, 'X', 1);
+            Player player2 = new Player(inputName2, 'O', 2);
+
+            while (true) {
+                playerIteration(player1, gameBoard, gameBoard.player1Positions);
+
+                playerIteration(player2, gameBoard, gameBoard.player2Positions);
             }
         } else if (choice == 2) {
-            // input "Enter Name"
-            while (true) {
-                playerIteration("Player1", gameBoard, gameBoard.player1Positions);
+            Scanner sc = new Scanner(System.in);
+            System.out.println("Player1 Enter your name");
+            String inputName1 = sc.nextLine();
 
-                cpuIteration("Cpu", gameBoard, gameBoard.cpuPositions);
+            Player player1 = new Player(inputName1, 'X', 1);
+            Player cpu = new Player("Cpu", 'O', 2);
+
+            while (true) {
+                playerIteration(player1, gameBoard, gameBoard.player1Positions);
+
+                cpuIteration(cpu, gameBoard, gameBoard.player2Positions);
             }
         }
     }
+    static void playerIteration (Player player, GameBoard gameBoard, ArrayList arrayList) {
+        Scanner scanner = new Scanner(System.in);
+
+        System.out.println(player.getName() + " place your piece");
+        int playerPos = scanner.nextInt();
+        // while input is equal to a value in one of playerPos-array, ask for a new value.
+        while (gameBoard.player1Positions.contains(playerPos) || gameBoard.player2Positions.contains(playerPos)) {
+            System.out.println("Position taken!!!");
+            playerPos = scanner.nextInt();
+        }
+        gameBoard.placePiece(player, playerPos);
+        gameBoard.printGameBoard();
+        System.out.println(arrayList);
+    }
+    static void cpuIteration (Player player, GameBoard gameBoard, ArrayList arrayList) {
+        Random rNG = new Random();
+        /* cpu position is set by a randomNumberGenerator (1-9)
+        1-9 */
+        int cpuPos = rNG.nextInt(9) + 1;
+        while (gameBoard.player1Positions.contains(cpuPos) || gameBoard.player2Positions.contains(cpuPos)) {
+            cpuPos = rNG.nextInt(9) + 1;
+        }
+        gameBoard.placePiece(player, cpuPos);
+        gameBoard.printGameBoard();
+        System.out.println(arrayList);
+    }
+
 }
 
 

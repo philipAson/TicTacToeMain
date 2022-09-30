@@ -20,51 +20,52 @@ public class GameBoard {
                 " "+gameBoard[2][0]+" | "+gameBoard[2][1]+" | "+gameBoard[2][2]+" ");
     }
     //Method that takes in a String and int. representing a player and referred position.
-    void placePiece(String player, int pos) {
+    void placePiece(Player player, int pos) {
 
         char symbol = ' ';
         /* if statement that decides what value (symbol) has,
         depending on what String u place in the Method
         then stores that value in a playerArray */
-        if (player.equals("Player1")) {
-            symbol = 'X';
+
+//      char symbol = player.getSymbol()
+
+
+
+        if (player.getPlayerNum() == 1) {
             player1Positions.add(pos);
-        } else if (player.equals("Player2")) {
-            symbol = 'O';
+        } else if (player.getPlayerNum() == 2) {
             player2Positions.add(pos);
-        } else if (player.equals("Cpu")) {
-            symbol = 'O';
-            cpuPositions.add(pos);
+
         }
         /* Switch statement that takes in an int which represents a place in the 2D array.
         and places an X/O there */
         switch (pos) {
             case 1:
-                gameBoard[0][0] = symbol;
+                gameBoard[0][0] = player.getSymbol();
                 break;
             case 2:
-                gameBoard[0][1] = symbol;
+                gameBoard[0][1] = player.getSymbol();
                 break;
             case 3:
-                gameBoard[0][2] = symbol;
+                gameBoard[0][2] = player.getSymbol();
                 break;
             case 4:
-                gameBoard[1][0] = symbol;
+                gameBoard[1][0] = player.getSymbol();
                 break;
             case 5:
-                gameBoard[1][1] = symbol;
+                gameBoard[1][1] = player.getSymbol();
                 break;
             case 6:
-                gameBoard[1][2] = symbol;
+                gameBoard[1][2] = player.getSymbol();
                 break;
             case 7:
-                gameBoard[2][0] = symbol;
+                gameBoard[2][0] = player.getSymbol();
                 break;
             case 8:
-                gameBoard[2][1] = symbol;
+                gameBoard[2][1] = player.getSymbol();
                 break;
             case 9:
-                gameBoard[2][2] = symbol;
+                gameBoard[2][2] = player.getSymbol();
                 break;
             default:
                 System.out.println("Not a valid position!");
