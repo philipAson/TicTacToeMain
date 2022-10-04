@@ -3,11 +3,15 @@ public class Player {
     String name;
     char symbol;
     int playerNum;
+    int winCount;
 
-    public Player(String name, char symbol, int playerNum) {
+
+
+    public Player(String name, char symbol, int playerNum, int winCount) {
         this.name = name;
         this.symbol = symbol;
         this.playerNum = playerNum;
+        this.winCount = 0;
     }
     public String getName() {
         return name;
@@ -21,5 +25,11 @@ public class Player {
     }
     public int getPlayerNum() {return playerNum;}
     public void setPlayerNum(int playerNum) {this.playerNum = playerNum;}
+    public int getWinCount() {return winCount;}
+    public void setWinCount(int winCount) {this.winCount = winCount;}
+
+    void addWin() {
+        this.winCount = winCount + 1;
+    }
 }
 
