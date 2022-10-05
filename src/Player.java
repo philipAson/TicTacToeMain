@@ -4,15 +4,14 @@ public class Player {
     char symbol;
     int playerNum;
     int winCount;
-
-
-
-    public Player(String name, char symbol, int playerNum, int winCount) {
+    // Constructor
+    public Player(String name, char symbol, int playerNum) {
         this.name = name;
         this.symbol = symbol;
         this.playerNum = playerNum;
         this.winCount = 0;
     }
+    // setters N getters
     public String getName() {
         return name;
     }
@@ -28,8 +27,8 @@ public class Player {
     public int getWinCount() {return winCount;}
     public void setWinCount(int winCount) {this.winCount = winCount;}
 
+    // method that adds 1 to players winCount each time its called
     void addWin() {
         this.winCount = winCount + 1;
     }
 }
-

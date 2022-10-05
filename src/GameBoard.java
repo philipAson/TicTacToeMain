@@ -1,22 +1,16 @@
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Collections;
 import java.util.List;
 
 public class GameBoard {
     // Array-lists that stores the "players move".
     ArrayList<Integer> player1Positions = new ArrayList<>();
     ArrayList<Integer> player2Positions = new ArrayList<>();
-
     // char 2D array that defines our game board
     private char [][] gameBoard = {
             {' ',' ',' '},
             {' ',' ',' '},
             {' ',' ',' '}};
-    private int [][] winningConditions ={
-            {1, 2, 3},{4, 5, 6},{7, 8, 9},  //row
-            {1, 4, 7},{2, 5, 8},{3, 6, 9},  //colum
-            {1, 5, 9},{3, 5, 7}};            //cross
     // method for printing the gameBoard and its content in a visually appealing way
     void printGameBoard() {
         System.out.println(
@@ -36,14 +30,12 @@ public class GameBoard {
     }
     //Method that takes in a Player and int. representing a player and referred position.
     void placePiece(Player player, int pos) {
-
         /* if statement that decides which ArrayList to place (int pos("position")) in
         depending on what (playerNum), (Player player) has */
         if (player.getPlayerNum() == 1) {
             player1Positions.add(pos);
         } else if (player.getPlayerNum() == 2) {
             player2Positions.add(pos);
-
         }
         /* Switch statement that takes in an int which represents a place in the 2D array.
         and places an X/O there */
@@ -79,7 +71,6 @@ public class GameBoard {
                 System.out.println("Not a valid position!");
         }
     }
-
     public String checkWin(Player player) {
         /* winning conditions.
         Purpose to check if player1/2positions contains all values in one of the lists. */
@@ -104,17 +95,22 @@ public class GameBoard {
         winningConditions.add(cross2);
         // for each list inside winningConditions check >
         for (List l : winningConditions) {
-            // if player1Pos or player2Pos contains all elements in on of the list
-            if (player1Positions.containsAll(l) || player2Positions.containsAll(l))
+            // if player1Pos or player2Pos contains all elements in one of the lists
+            if (player1Positions.containsAll(l) || player2Positions.containsAll(l)) {
+                // adds a win to current player
+                player.addWin();
                 //return string player + won !!!
                 return player.getName() + "won !!!";
+            }
         }
-        /* if there is no winning conditions and both list of positions is = 9
+
+        /* if there's no winning conditions, and the amount of elements in both lists is = 9
         (maximum amount of places on the board) return String Tie !!!! */
         if (player1Positions.size() + player2Positions.size() == 9)
             return "Tie !!!!";
         return "";
     }
+    // method that "clears" the gameBoard
     void setGameBoard() {
         gameBoard [0][0] = ' ';
         gameBoard [0][1] = ' ';
@@ -126,25 +122,4 @@ public class GameBoard {
         gameBoard [2][1] = ' ';
         gameBoard [2][2] = ' ';
     }
-
-
-/*    boolean checkWin() {
-
-        if (player1Positions.containsAll(Collections.singleton(winningConditions)) ||
-            player2Positions.containsAll(Collections.singleton(winningConditions))) {
-            return true;
-        } else
-            return false;
-    } */
-    boolean checkTie() {
-        if ((player1Positions.size() + player2Positions.size()) == 9) {
-            return true;
-        } else
-            return false;
-    }
-
-
-
-
 }
-
