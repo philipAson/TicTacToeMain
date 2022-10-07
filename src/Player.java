@@ -25,7 +25,6 @@ public class Player {
     public int getPlayerNum() {return playerNum;}
     public void setPlayerNum(int playerNum) {this.playerNum = playerNum;}
     public int getWinCount() {return winCount;}
-    public void setWinCount(int winCount) {this.winCount = winCount;}
 
     // method that adds 1 to players winCount each time its called
     void addWin() {

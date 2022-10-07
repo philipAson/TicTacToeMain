@@ -1,7 +1,6 @@
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-
 public class GameBoard {
     // Array-lists that stores the "players move".
     ArrayList<Integer> player1Positions = new ArrayList<>();
